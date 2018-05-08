@@ -1,0 +1,9 @@
+com\parameta\dao\ServiceDAOImplService.class
+com\parameta\service\RestService.class
+com\parameta\dao\ServiceDAOImpl.class
+com\parameta\model\Empleado.class
+com\parameta\aplication\RestServiceAplication.class
+mainTest.class
+com\parameta\dao\ServiceDAOImplProxy.class
+com\parameta\dao\ServiceDAOImplSoapBindingStub.class
+com\parameta\dao\ServiceDAOImplServiceLocator.class

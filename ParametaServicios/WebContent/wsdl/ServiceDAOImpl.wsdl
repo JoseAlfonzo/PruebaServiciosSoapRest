@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://dao.parameta.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://dao.parameta.com" xmlns:intf="http://dao.parameta.com" xmlns:tns1="http://model.parameta.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://dao.parameta.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://model.parameta.com"/>
+   <element name="agregarEmpleado">
+    <complexType>
+     <sequence>
+      <element name="empleado" type="tns1:Empleado"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="agregarEmpleadoResponse">
+    <complexType>
+     <sequence>
+      <element name="agregarEmpleadoReturn" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getEmpleado">
+    <complexType>
+     <sequence>
+      <element name="id" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getEmpleadoResponse">
+    <complexType>
+     <sequence>
+      <element name="getEmpleadoReturn" type="tns1:Empleado"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://model.parameta.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="Empleado">
+    <sequence>
+     <element name="apellidos" nillable="true" type="xsd:string"/>
+     <element name="cargo" nillable="true" type="xsd:string"/>
+     <element name="documento" nillable="true" type="xsd:string"/>
+     <element name="edad" nillable="true" type="xsd:int"/>
+     <element name="fechaNacimiento" nillable="true" type="xsd:dateTime"/>
+     <element name="fechaVinculacionACompania" nillable="true" type="xsd:dateTime"/>
+     <element name="idEmpleado" nillable="true" type="xsd:int"/>
+     <element name="nombres" nillable="true" type="xsd:string"/>
+     <element name="salario" nillable="true" type="xsd:double"/>
+     <element name="tipoDocumento" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="agregarEmpleadoResponse">
+
+      <wsdl:part element="impl:agregarEmpleadoResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="agregarEmpleadoRequest">
+
+      <wsdl:part element="impl:agregarEmpleado" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getEmpleadoResponse">
+
+      <wsdl:part element="impl:getEmpleadoResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getEmpleadoRequest">
+
+      <wsdl:part element="impl:getEmpleado" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="ServiceDAOImpl">
+
+      <wsdl:operation name="agregarEmpleado">
+
+         <wsdl:input message="impl:agregarEmpleadoRequest" name="agregarEmpleadoRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:agregarEmpleadoResponse" name="agregarEmpleadoResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getEmpleado">
+
+         <wsdl:input message="impl:getEmpleadoRequest" name="getEmpleadoRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getEmpleadoResponse" name="getEmpleadoResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="ServiceDAOImplSoapBinding" type="impl:ServiceDAOImpl">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="agregarEmpleado">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="agregarEmpleadoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="agregarEmpleadoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getEmpleado">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getEmpleadoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getEmpleadoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="ServiceDAOImplService">
+
+      <wsdl:port binding="impl:ServiceDAOImplSoapBinding" name="ServiceDAOImpl">
+
+         <wsdlsoap:address location="http://localhost:8080/ParametaServicios/services/ServiceDAOImpl"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
