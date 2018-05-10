@@ -1,6 +1,5 @@
 package com.parameta.service;
 
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.rmi.RemoteException;
 import java.text.ParseException;
@@ -9,7 +8,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -54,19 +56,18 @@ public class RestService {
 	    GenericEntity<Empleado> entity = new GenericEntity<Empleado>(emp, Empleado.class);
 	    return Response.ok().entity(entity).build();
 	}
- 
-	@GET
-	@Path("/{nombres}/{apellidos}/{tipoDocumento}/{documento}/"
-			+ "{fechaNacimiento}/{cargo}/{salario}")
+	
+	@POST
+	@Consumes("application/x-www-form-urlencoded;charset=UTF-8")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response agregarEmpleado(
-			@PathParam("nombres") String nombres,
-			@PathParam("apellidos") String apellidos,
-			@PathParam("tipoDocumento") String tipoDocumento,
-			@PathParam("documento") String documento,
-			@PathParam("fechaNacimiento") String fechaNacimiento,
-			@PathParam("cargo") String cargo,
-			@PathParam("salario") Double salario
+			@FormParam("nombres") String nombres,
+			@FormParam("apellidos") String apellidos,
+			@FormParam("tipoDocumento") String tipoDocumento,
+			@FormParam("documento") String documento,
+			@FormParam("fechaNacimiento") String fechaNacimiento,
+			@FormParam("cargo") String cargo,
+			@FormParam("salario") Double salario
 			) throws URISyntaxException
 	{
 	     
@@ -74,24 +75,24 @@ public class RestService {
 		Calendar fechaVinculacion = GregorianCalendar.getInstance();
 		Integer edad = 0;
 		
-	    if(nombres == null) {
+	    if(nombres == null || nombres.isEmpty()) {
 	        return Response.status(400).entity("Por favor ingrese el nombre del empleado").build();
 	    }
 	    
-	    if(apellidos == null) {
-	        return Response.status(400).entity("Por favor ingrese el nombre del empleado").build();
+	    if(apellidos == null || apellidos.isEmpty()) {
+	        return Response.status(400).entity("Por favor ingrese el apellidos del empleado").build();
 	    }
 	    
-	    if(tipoDocumento== null) {
-	        return Response.status(400).entity("Por favor ingrese el nombre del empleado").build();
+	    if(tipoDocumento== null || tipoDocumento.isEmpty()) {
+	        return Response.status(400).entity("Por favor ingrese el tipoDocumento del empleado").build();
 	    }
 	    
-	    if(documento== null) {
-	        return Response.status(400).entity("Por favor ingrese el nombre del empleado").build();
+	    if(documento== null || documento.isEmpty()) {
+	        return Response.status(400).entity("Por favor ingrese el documento del empleado").build();
 	    }
 	    
 	    if(fechaNacimiento == null) {
-	        return Response.status(400).entity("Por favor ingrese el nombre del empleado").build();
+	        return Response.status(400).entity("Por favor ingrese el fechaNacimiento del empleado").build();
 	    }else {
 	    	if(!validarFecha(fechaNacimiento)) {
 	    		return Response.status(400).entity("El formato de la fecha es incorrecto").build();
@@ -108,12 +109,12 @@ public class RestService {
 	    		
 	    }
 	    
-	    if(cargo == null) {
-	        return Response.status(400).entity("Por favor ingrese el nombre del empleado").build();
+	    if(cargo == null || cargo.isEmpty()) {
+	        return Response.status(400).entity("Por favor ingrese el  cargo del empleado").build();
 	    }
 	    
 	    if(salario == null) {
-	        return Response.status(400).entity("Por favor ingrese el nombre del empleado").build();
+	        return Response.status(400).entity("Por favor ingrese el salario del empleado").build();
 	    }
 	    
 	    edad = calcularEdad(fechaNaci.getTime());
@@ -139,6 +140,7 @@ public class RestService {
 		long id = 0;
 		
 		try {
+			
 			ServiceDAOImpl service = locator.getServiceDAOImpl();
 			
 			id = service.agregarEmpleado(emp);
